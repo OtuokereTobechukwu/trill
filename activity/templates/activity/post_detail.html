@@ -1,0 +1,50 @@
+{#{% extends "base.html" %}#}
+{#{% block content %}#}
+{#    <article class="media content-section">#}
+{#        <img class = "rounded-circle article-img" src = "{{ object.author.profile.image.url}}" alt="#">#}
+{#              <div class="media-body">#}
+{#                <div class="article-metadata">#}
+{#                  <a class="mr-2" href="#">{{ object.author }}</a>#}
+{#                  <small class="text-muted">{{ object.created|date:"F d, Y" }}</small>#}
+{#                    <p>{{ object.description }}</p>#}
+{#                  {% if object.author == user %}#}
+{#                    <div>#}
+{#                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{%url 'post-update' object.id %}">Update</a>#}
+{##}
+{#                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>#}
+{#                    </div>#}
+{##}
+{#                  {% endif %}#}
+{#                </div>#}
+{#          </div>#}
+{#    </article>#}
+{#{% endblock content %}#}
+
+
+
+{% extends "base.html" %}
+{% block title %}{{ post.author.id }}{% endblock %}
+{% block content %}
+    <h1>{{ post.author }}</h1>
+    <img src="{{ post.image.url }}" class="image-detail">
+    {% with total_likes=post.users_like.count %}
+        <div class="image-info">
+            <div>
+            <span class="count">
+            {{ total_likes }} like{{ total_likes|pluralize }}
+            </span>
+            </div>
+            {{ post.description|linebreaks }}
+        </div>
+        <div class="image-likes">
+            {% for user in post.users_like.all %}
+                <div>
+                <img src="{{ user.profile.photo }}">
+                <p>{{ user.first_name }}</p>
+                </div>
+                {% empty %}
+                <p>Nobody likes this image yet.</p>
+            {% endfor %}
+        </div>
+    {% endwith %}
+{% endblock %}

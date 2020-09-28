@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from django.urls import reverse
 # Create your models here.
 
-class Posts(models.Model):
+class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=200, blank=True)
     image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True)

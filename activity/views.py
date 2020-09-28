@@ -5,14 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
-from .models import Posts
+from .models import Post
 from .forms import PostCreateForm
 # Create your views here.
 
 
 #@login_required
 class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Posts
+    model = Post
     fields = ['description', 'image']
 
     def form_valid(self, form):
@@ -20,13 +20,13 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 class PostListView(LoginRequiredMixin, ListView):
-    model = Posts
+    model = Post
     template_name = 'activity/timeline.html'
     context_object_name = 'posts'
     ordering = ['-created']
 
 
 class PostDetailView(DetailView):
-    model = Posts
+    model = Post
 
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Posts
+from .models import Post
 from urllib import request
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
@@ -14,10 +14,10 @@ class PostCreateForm(forms.ModelForm):
         return posts
 
     class Meta:
-        model = Posts
+        model = Post
         fields = ('image', 'description')
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
-        model = Posts
+        model = Post
         fields = ('image', 'description')
