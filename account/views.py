@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
 
+
 # Create your views here.
 def user_login(request):
     if request.method == 'POST':
@@ -63,7 +64,7 @@ def edit(request):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Profile updated successfully')
-            return render(request,'account/dashboard.html')
+            return render(request,'activity/timeline.html')
         else:
             messages.error(request, 'You have some errors!')
     else:
